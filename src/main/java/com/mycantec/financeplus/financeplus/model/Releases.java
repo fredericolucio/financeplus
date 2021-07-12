@@ -2,45 +2,46 @@ package com.mycantec.financeplus.financeplus.model;
 
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-
-import com.sun.istack.NotNull;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Releases {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotBlank
 	private String description;
-	@NotNull
-	private int category;
-	@Min(0)
+	@ManyToOne
+	private Category category;
 	private Float  value;
-	@NotNull
-	private int account;
-	@NotBlank
+	@ManyToOne
+	private Accounts account;
 	private String status;
+	private Date data;
 	
 	
 	public Releases() {
 		
 		}
 	
-	public Releases(String description, int category, Float value, int account, String status) {
+	
+
+	public Releases(String description, Category category, Float value, Accounts account, String status, Date data) {
 		super();
 		this.description = description;
-		this.category = category;
+		this.setCategory(category);
 		this.value = value;
-		this.account = account;
+		this.setAccount(account);
 		this.status = status;
-		
+		this.data = data;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -58,11 +59,11 @@ public class Releases {
 		this.description = description;
 	}
 
-	public int getCategoryId() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategoryId(int category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -74,11 +75,11 @@ public class Releases {
 		this.value = value;
 	}
 
-	public int getAccountId() {
+	public Accounts getAccount() {
 		return account;
 	}
 
-	public void setAccountId(int account) {
+	public void setAccount(Accounts account) {
 		this.account = account;
 	}
 
@@ -89,6 +90,16 @@ public class Releases {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	
 	
 
 	
